@@ -1,10 +1,9 @@
-
 import { NavLink } from 'react-router-dom'
 
 const links = [
   { id: 1, url: 'About', text: 'about' },
-  { id: 1, url: 'products', text: 'products' },
-  { id: 1, url: 'orders', text: 'oders' },
+  { id: 2, url: 'products', text: 'products' },
+  { id: 3, url: 'orders', text: 'oders' },
 ]
 const NavList = () => {
   return (
