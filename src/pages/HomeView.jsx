@@ -6,7 +6,7 @@ const HomeView = () => {
   const [products, setProducts] = useState([])
   const getProducts = async () => {
     try {
-      const { data } = await customAPI.get('/product/?limit=2')
+      const { data } = await customAPI.get('/product?limit=2')
       setProducts(data.data)
     } catch (error) {
       console.error('Error fetching products:', error) // Improved error logging

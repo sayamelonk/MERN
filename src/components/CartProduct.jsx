@@ -1,4 +1,5 @@
-import PropTypes from 'prop-types'; // Import PropTypes
+import PropTypes from 'prop-types' // Import PropTypes
+import { Link } from 'react-router-dom'
 
 const CartProduct = ({ item }) => {
   // Function to format price to Indonesian Rupiah
@@ -6,12 +7,12 @@ const CartProduct = ({ item }) => {
     return new Intl.NumberFormat('id-ID', {
       style: 'currency',
       currency: 'IDR',
-    }).format(price);
-  };
+    }).format(price)
+  }
 
   // Check if item is valid
   if (!item) {
-    return <div className="text-red-500">Item not found</div>; // Error handling for missing item
+    return <div className="text-red-500">Item not found</div> // Error handling for missing item
   }
 
   return (
@@ -26,14 +27,21 @@ const CartProduct = ({ item }) => {
       <div className="card-body">
         <h2 className="card-title text-primary">{item.name}</h2>
         <p className="font-bold text-accent">{priceFormat(item.price)}</p>
-        <p>{item.description ? item.description.substring(0, 50) + '...' : 'No description available'}</p> {/* Fallback for description */}
+        <p>
+          {item.description
+            ? item.description.substring(0, 50) + '...'
+            : 'No description available'}
+        </p>{' '}
+        {/* Fallback for description */}
         <div className="card-actions justify-end">
-          <button className="btn btn-primary">Buy Now</button>
+          <Link to={`/product/${item._id}`} className="btn btn-primary">
+            Buy Now
+          </Link>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
 // PropTypes validation
 CartProduct.propTypes = {
@@ -44,6 +52,6 @@ CartProduct.propTypes = {
     price: PropTypes.number.isRequired,
     description: PropTypes.string,
   }).isRequired,
-};
+}
 
-export default CartProduct;
+export default CartProduct
