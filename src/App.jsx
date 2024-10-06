@@ -11,12 +11,15 @@ import RegisterView from './pages/auth/RegisterView'
 import PublicLayout from './layouts/PublicLayout'
 import DetailProduct from './pages/DetailProduct'
 
+// loader
+import { loader as HomeLoader } from './pages/HomeView'
+
 const router = createBrowserRouter([
   {
     path: '/',
     element: <PublicLayout />,
     children: [
-      { index: true, element: <HomeView /> },
+      { index: true, element: <HomeView />, loader: HomeLoader },
       { path: 'products', element: <ProductView /> },
       { path: 'product/:id', element: <DetailProduct /> },
       { path: 'orders', element: <OrderView /> },
