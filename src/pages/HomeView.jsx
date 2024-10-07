@@ -3,7 +3,7 @@ import customAPI from '../api'
 import { useLoaderData } from 'react-router-dom'
 
 export const loader = async ({ request }) => {
-  const { data } = await customAPI.get('/product?limit=2')
+  const { data } = await customAPI.get('/product')
   // console.log(data); // Tambahkan log untuk memeriksa data yang diterima
   const products = data.data
   return products
