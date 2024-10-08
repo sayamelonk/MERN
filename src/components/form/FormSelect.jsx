@@ -1,5 +1,4 @@
-import PropTypes from 'prop-types'
-
+/* eslint-disable react/prop-types */
 const FormSelect = ({ label, name, list, defaultValue }) => {
   return (
     <div className="form-control">
@@ -9,7 +8,7 @@ const FormSelect = ({ label, name, list, defaultValue }) => {
       <select
         name={name}
         className="select select-bordered"
-        value={defaultValue}
+        defaultValue={defaultValue}
       >
         {list.map((item) => (
           <option value={item} key={item}>
@@ -19,13 +18,6 @@ const FormSelect = ({ label, name, list, defaultValue }) => {
       </select>
     </div>
   )
-}
-
-FormSelect.propTypes = {
-  label: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  list: PropTypes.array.isRequired,
-  defaultValue: PropTypes.string,
 }
 
 export default FormSelect

@@ -3,13 +3,17 @@ import { useLoaderData } from 'react-router-dom'
 import Filter from '../components/Filter'
 import CartProduct from '../components/CartProduct'
 
-export const loader = async () => {
-  const { data } = await customAPI.get('/product')
-  // console.log(data);
+// eslint-disable-next-line react-refresh/only-export-components
+export const loader = async ({ request }) => {
+  const params = Object.fromEntries([
+    ...new URL(request.url).searchParams.entries(),
+  ])
+  const { data } = await customAPI.get('/product', { params: params })
   // console.log(request);
+  // console.log(params)
 
   const products = data.data
-  return products
+  return { products, params }
 }
 
 const ProductView = () => {
@@ -19,8 +23,10 @@ const ProductView = () => {
     <>
       <Filter />
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 mt-5">
-        {products.length > 0 ? (
-          products.map((item) => <CartProduct key={item._id} item={item} />)
+        {products.products.length > 0 ? (
+          products.products.map((item) => (
+            <CartProduct key={item._id} item={item} />
+          ))
         ) : (
           <p className="text-center">No products available</p>
         )}

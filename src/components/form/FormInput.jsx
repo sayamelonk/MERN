@@ -1,5 +1,4 @@
-import PropTypes from 'prop-types'
-
+/* eslint-disable react/prop-types */
 const FormInput = ({ label, name, type, defaultValue }) => {
   return (
     <div className="form-control">
@@ -15,12 +14,4 @@ const FormInput = ({ label, name, type, defaultValue }) => {
     </div>
   )
 }
-
-FormInput.propTypes = {
-  label: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  type: PropTypes.array.isRequired,
-  defaultValue: PropTypes.string,
-}
-
 export default FormInput
