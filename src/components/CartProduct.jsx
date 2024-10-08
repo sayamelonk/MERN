@@ -16,7 +16,7 @@ const CartProduct = ({ item }) => {
   }
 
   return (
-    <div className="card bg-base-300 w-96 shadow-xl mb-6">
+    <div className="card bg-base-300 w-30 shadow-xl mb-6">
       <figure>
         <img
           src={item.image}
