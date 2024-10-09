@@ -2,6 +2,7 @@ import customAPI from '../api'
 import { useLoaderData } from 'react-router-dom'
 import Filter from '../components/Filter'
 import CartProduct from '../components/CartProduct'
+import Pagination from '../components/Pagination'
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const loader = async ({ request }) => {
@@ -13,23 +14,28 @@ export const loader = async ({ request }) => {
   // console.log(params)
 
   const products = data.data
-  return { products, params }
+  const pagination = data.pagination
+  return { products, params, pagination }
 }
 
 const ProductView = () => {
-  const products = useLoaderData()
-  console.log(products)
+  const { products, pagination } = useLoaderData()
+  // console.log(products)
   return (
     <>
       <Filter />
+      <h3 className="text-lg text-primary font-bold text-right my-3">
+        Total {pagination.totalProduct} Product
+      </h3>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 mt-5">
-        {products.products.length > 0 ? (
-          products.products.map((item) => (
-            <CartProduct key={item._id} item={item} />
-          ))
+        {products?.length > 0 ? (
+          products.map((item) => <CartProduct key={item._id} item={item} />)
         ) : (
           <p className="text-center">No products available</p>
         )}
+      </div>
+      <div className="mt-5 flex justify-center">
+        <Pagination />
       </div>
     </>
   )
