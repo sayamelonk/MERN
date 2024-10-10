@@ -1,5 +1,11 @@
+import FormAuth from '../../components/FormAuth'
+
 const LoginView = () => {
-  return <div>LoginView</div>
+  return (
+    <main>
+      <FormAuth />
+    </main>
+  )
 }
 
 export default LoginView

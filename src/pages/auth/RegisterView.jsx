@@ -1,8 +1,10 @@
-
+import FormAuth from '../../components/FormAuth'
 
 const RegisterView = () => {
   return (
-    <div>RegisterView</div>
+    <main>
+      <FormAuth isRegister={true} />
+    </main>
   )
 }
 
