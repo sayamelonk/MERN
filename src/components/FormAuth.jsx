@@ -1,6 +1,7 @@
 import { Form, Link } from 'react-router-dom'
 import FormInput from './form/FormInput'
 
+// eslint-disable-next-line react/prop-types
 const FormAuth = ({ isRegister }) => {
   return (
     <div className="h-screen grid place-items-center">
