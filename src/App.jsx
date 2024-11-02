@@ -1,61 +1,65 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 // component
-import AboutView from "./pages/AboutView";
-import HomeView from "./pages/HomeView";
-import CartView from "./pages/CartView";
-import OrderView from "./pages/OrderView";
-import ProductView from "./pages/ProductView";
-import LoginView from "./pages/auth/LoginView";
-import RegisterView from "./pages/auth/RegisterView";
-import PublicLayout from "./layouts/PublicLayout";
-import DetailProduct from "./pages/DetailProduct";
+import AboutView from './pages/AboutView'
+import HomeView from './pages/HomeView'
+import CartView from './pages/CartView'
+import OrderView from './pages/OrderView'
+import ProductView from './pages/ProductView'
+import LoginView from './pages/auth/LoginView'
+import RegisterView from './pages/auth/RegisterView'
+import PublicLayout from './layouts/PublicLayout'
+import DetailProduct from './pages/DetailProduct'
 
 // loader
-import { loader as HomeLoader } from "./pages/HomeView";
-import { loader as ProductLoader } from "./pages/ProductView";
+import { loader as HomeLoader } from './pages/HomeView'
+import { loader as ProductLoader } from './pages/ProductView'
+
+// action
+import { action as LoginAction } from './pages/auth/LoginView'
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <PublicLayout />,
     children: [
       { index: true, element: <HomeView />, loader: HomeLoader },
-      { path: "products", element: <ProductView />, loader: ProductLoader },
-      { path: "product/:id", element: <DetailProduct /> },
-      { path: "orders", element: <OrderView /> },
-      { path: "carts", element: <CartView /> },
-      { path: "about", element: <AboutView /> },
+      { path: 'products', element: <ProductView />, loader: ProductLoader },
+      { path: 'product/:id', element: <DetailProduct /> },
+      { path: 'orders', element: <OrderView /> },
+      { path: 'carts', element: <CartView /> },
+      { path: 'about', element: <AboutView /> },
     ],
   },
   {
-    path: "/login",
+    path: '/login',
     element: <LoginView />,
+    action: LoginAction,
   },
   {
-    path: "/register",
+    path: '/register',
     element: <RegisterView />,
   },
   {
-    path: "products",
+    path: 'products',
     element: <ProductView />,
   },
   {
-    path: "product/:id",
+    path: 'product/:id',
     element: <DetailProduct />,
   },
   {
-    path: "orders",
+    path: 'orders',
     element: <OrderView />,
   },
   {
-    path: "cart",
+    path: 'cart',
     element: <CartView />,
   },
-]);
+])
 
 function App() {
-  return <RouterProvider router={router} />;
+  return <RouterProvider router={router} />
 }
 
-export default App;
+export default App
