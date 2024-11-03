@@ -5,7 +5,6 @@ const defaultValue = {
   CartItems: [],
   numItemsInCart: 0,
   cartTotal: 0,
-  orderTotal: 0,
 };
 
 const getCartFromLocalStorage = () => {
@@ -26,7 +25,6 @@ const cartSlice = createSlice({
       }
       state.numItemsInCart += product.amount;
       state.cartTotal += product.price * product.amount;
-      state.orderTotal += state.cartTotal;
 
       localStorage.setItem("cart", JSON.stringify(state));
       toast.success(`${product.name} added to cart`, {
