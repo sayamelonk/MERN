@@ -1,15 +1,8 @@
 import PropTypes from 'prop-types' // Import PropTypes
 import { Link } from 'react-router-dom'
+import { priceFormat } from '../utils'
 
 const CartProduct = ({ item }) => {
-  // Function to format price to Indonesian Rupiah
-  const priceFormat = (price) => {
-    return new Intl.NumberFormat('id-ID', {
-      style: 'currency',
-      currency: 'IDR',
-    }).format(price)
-  }
-
   // Check if item is valid
   if (!item) {
     return <div className="text-red-500">Item not found</div> // Error handling for missing item
