@@ -36,8 +36,36 @@ const cartSlice = createSlice({
         },
       });
     },
+    editItem: (state, action) => {
+      const { cartId, amount } = action.payload;
+      const itemProduct = state.CartItems.find(
+        (item) => item.cartId === cartId
+      );
+
+      state.numItemsInCart += amount - itemProduct.amount;
+      state.cartTotal += itemProduct.price * (amount - itemProduct.amount);
+      itemProduct.amount = amount;
+      localStorage.setItem("cart", JSON.stringify(state));
+
+      toast.info("Keranjang berhasil diupdate");
+    },
+
+    removeItem: (state, action) => {
+      const { cartId } = action.payload;
+      const itemProduct = state.CartItems.find(
+        (item) => item.cartId === cartId
+      );
+      state.CartItems = state.CartItems.filter(
+        (item) => item.cartId !== cartId
+      );
+
+      state.numItemsInCart -= itemProduct.amount;
+      state.cartTotal -= itemProduct.price * itemProduct.amount;
+      localStorage.setItem("cart", JSON.stringify(state));
+      toast.success("Keranjang Berhasil di hapus");
+    },
   },
 });
 
-export const { addItem } = cartSlice.actions;
+export const { addItem, editItem, removeItem } = cartSlice.actions;
 export default cartSlice.reducer;
