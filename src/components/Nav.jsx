@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom'
 
 const Nav = () => {
   const user = useSelector((state) => state.userState.user)
+  const countInCart = useSelector((state) => state.cartState.numItemsInCart)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -52,7 +53,7 @@ const Nav = () => {
             <div className="indicator">
               <BsCart3 />
               <span className="badge badge-primary badge-sm indicator-item">
-                8
+                {countInCart}
               </span>
             </div>
           </NavLink>
