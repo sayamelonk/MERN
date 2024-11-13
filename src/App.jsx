@@ -10,6 +10,7 @@ import LoginView from './pages/auth/LoginView'
 import RegisterView from './pages/auth/RegisterView'
 import PublicLayout from './layouts/PublicLayout'
 import DetailProduct from './pages/DetailProduct'
+import CheckoutView from './pages/CheckoutView'
 
 // loader
 import { loader as HomeLoader } from './pages/HomeView'
@@ -33,13 +34,13 @@ const router = createBrowserRouter([
       { path: 'orders', element: <OrderView /> },
       { path: 'carts', element: <CartView /> },
       { path: 'about', element: <AboutView /> },
+      { path: 'checkout', element: <CheckoutView /> },
     ],
   },
   {
     path: '/login',
     element: <LoginView />,
     action: LoginAction(store),
-
   },
   {
     path: '/register',
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
   {
     path: 'orders',
     element: <OrderView />,
+  },
+  {
+    path: 'checkout',
+    element: <CheckoutView />,
   },
   {
     path: 'cart',
