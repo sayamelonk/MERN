@@ -50,6 +50,11 @@ const cartSlice = createSlice({
       toast.info("Keranjang berhasil diupdate");
     },
 
+    clearCartItem: (state) => {
+      localStorage.setItem("cart", JSON.stringify(defaultValue));
+      return defaultValue;
+    },
+
     removeItem: (state, action) => {
       const { cartId } = action.payload;
       const itemProduct = state.CartItems.find(
@@ -67,5 +72,6 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addItem, editItem, removeItem } = cartSlice.actions;
+export const { addItem, editItem, removeItem, clearCartItem } =
+  cartSlice.actions;
 export default cartSlice.reducer;

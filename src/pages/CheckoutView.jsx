@@ -1,9 +1,11 @@
 import CartTotal from '../components/CartTotal'
 import FormInput from '../components/form/FormInput'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import customAPI from '../api'
 import { toast } from 'react-toastify'
+import { clearCartItem } from '../features/cartSlice'
+import { useNavigate } from 'react-router-dom'
 
 const insertSnapScript = () => {
   return new Promise((resolve) => {
@@ -22,6 +24,9 @@ const insertSnapScript = () => {
 const CheckoutView = () => {
   const user = useSelector((state) => state.userState.user)
   const carts = useSelector((state) => state.cartState.CartItems)
+
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   useEffect(() => {
     insertSnapScript()
@@ -57,7 +62,8 @@ const CheckoutView = () => {
         // Optional
         onSuccess: function (result) {
           console.log(result)
-          alert('Payment Success !')
+          dispatch(clearCartItem())
+          navigate('/orders')
         },
         // Optional
         onPending: function (result) {
@@ -72,8 +78,8 @@ const CheckoutView = () => {
       })
       toast.success('Berhasil Melakukan Pembayaran')
     } catch (error) {
-      console.log(error)
-      alert('Failed to process the request')
+      const errorMessage = error?.response?.data?.message
+      toast.error(errorMessage)
     }
   }
 

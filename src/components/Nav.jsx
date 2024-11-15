@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import customAPI from '../api'
 import { logoutUser } from '../features/userSlice'
 import { useNavigate } from 'react-router-dom'
+import { clearCartItem } from '../features/cartSlice'
 
 const Nav = () => {
   const user = useSelector((state) => state.userState.user)
@@ -14,10 +15,17 @@ const Nav = () => {
   const navigate = useNavigate()
 
   const handlingLogout = async () => {
-    // console.log('logout berhasil')
-    await customAPI.get('/auth/logout')
-    dispatch(logoutUser())
-    navigate('/')
+    try {
+      // console.log('logout berhasil')
+      await customAPI.get('/auth/logout')
+      dispatch(clearCartItem())
+      dispatch(logoutUser())
+      navigate('/')
+    } catch (error) {
+      dispatch(clearCartItem())
+      dispatch(logoutUser())
+      navigate('/')
+    }
   }
   return (
     <div className="bg-base-200">
