@@ -11,6 +11,8 @@ import RegisterView from './pages/auth/RegisterView'
 import PublicLayout from './layouts/PublicLayout'
 import DetailProduct from './pages/DetailProduct'
 import CheckoutView from './pages/CheckoutView'
+import CreateProductView from './pages/CreateProductView'
+import EditProductView from './pages/EditProductView'
 
 // loader
 import { loader as HomeLoader } from './pages/HomeView'
@@ -36,6 +38,8 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <HomeView />, loader: HomeLoader },
       { path: 'products', element: <ProductView />, loader: ProductLoader },
+      { path: 'product/create', element: <CreateProductView /> },
+      { path: 'product/:id/edit', element: <EditProductView /> },
       { path: 'product/:id', element: <DetailProduct /> },
       { path: 'orders', element: <OrderView />, loader: OrderLoader(store) },
       { path: 'carts', element: <CartView /> },

@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types' // Import PropTypes
 import { Link } from 'react-router-dom'
 import { priceFormat } from '../utils'
+import { FaTrash, FaPencilAlt } from 'react-icons/fa'
 
-const CartProduct = ({ item }) => {
+const CartProduct = ({ item, user }) => {
   // Check if item is valid
   if (!item) {
     return <div className="text-red-500">Item not found</div> // Error handling for missing item
@@ -18,6 +19,14 @@ const CartProduct = ({ item }) => {
         />
       </figure>
       <div className="card-body">
+        {user && user.role === 'owner' && (
+          <div className="flex justify-end gap-x-3">
+            <FaTrash className="text-red-500 cursor-pointer" />
+            <Link to={`/product/${item._id}/edit`}>
+              <FaPencilAlt className="text-info cursor-pointer" />
+            </Link>
+          </div>
+        )}
         <h2 className="card-title text-primary">{item.name}</h2>
         <p className="font-bold text-accent">{priceFormat(item.price)}</p>
         <p>
@@ -48,3 +57,10 @@ CartProduct.propTypes = {
 }
 
 export default CartProduct
+
+CartProduct.propTypes = {
+  // ... existing prop types ...
+  user: PropTypes.shape({
+    role: PropTypes.string,
+  }),
+}
