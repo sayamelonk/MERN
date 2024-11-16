@@ -37,7 +37,7 @@ const ProductView = () => {
       <h3 className="text-lg text-primary font-bold text-right my-3">
         Total {pagination.totalProduct} Product
       </h3>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 mt-5">
+      <div className="grid grid-cols-1md:grid-cols-3 lg:grid-cols-4 gap-12 mt-5">
         {products?.length > 0 ? (
           products.map((item) => (
             <CartProduct key={item._id} item={item} user={user} />

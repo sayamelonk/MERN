@@ -46,11 +46,18 @@ const DetailProduct = () => {
     <section className="p-4 md:p-8">
       <div className="card lg:card-side bg-base-300 shadow-xl flex flex-col md:flex-row">
         <figure className="md:w-1/2">
-          <img
-            src={product.image}
-            alt={product.name}
-            className="w-full h-full object-cover lg:h-[500px]"
-          />
+          <div className="relative">
+            <img
+              src={product.image}
+              alt={product.name}
+              className="w-full h-full object-cover lg:h-[500px]"
+            />
+            {product.stock < 1 && (
+              <span className="absolute top-2 right-2 inline-block px-4 py-2 text-white font-bold rounded-md bg-secondary">
+                Sold Out
+              </span>
+            )}
+          </div>
         </figure>
         <div className="card-body md:w-1/2">
           <h2 className="card-title">{product.name}</h2>
@@ -62,21 +69,28 @@ const DetailProduct = () => {
           <p className="mt-3">{product.description}</p>
           <div className="card-actions justify-end">
             <div className="p-8 flex flex-col gap-y-4">
-              <label className="form-control">
-                <label className="label">
-                  <span className="capitalize label-text">Amount</span>
-                </label>
-                <select
-                  name="amount"
-                  className="select select-bordered"
-                  onChange={handleAmount}
-                >
-                  {generateSelectedAmount(product.stock)}
-                </select>
-              </label>
-              <button className="btn btn-primary btn-lg" onClick={handleCart}>
-                <FaPlus /> Keranjang
-              </button>
+              {product.stock > 0 && (
+                <>
+                  <label className="form-control">
+                    <label className="label">
+                      <span className="capitalize label-text">Amount</span>
+                    </label>
+                    <select
+                      name="amount"
+                      className="select select-bordered"
+                      onChange={handleAmount}
+                    >
+                      {generateSelectedAmount(product.stock)}
+                    </select>
+                  </label>
+                  <button
+                    className="btn btn-primary btn-lg"
+                    onClick={handleCart}
+                  >
+                    <FaPlus /> Keranjang
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </div>
