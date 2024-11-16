@@ -3,7 +3,19 @@ import FormSelect from '../components/form/FormSelect'
 import FormTextArea from '../components/form/FormTextArea'
 import customAPI from '../api'
 import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, redirect } from 'react-router-dom'
+
+export const loader = (store) => async () => {
+  const user = store.getState().userState.user
+  if (!user) {
+    toast.warn('Anda Harus Login Terlebih Dahulu')
+    return redirect('/login')
+  } else if (user.role !== 'owner') {
+    toast.warn('Anda Bukan Owner')
+    return redirect('/')
+  }
+  return null
+}
 
 const CreateProductView = () => {
   const categories = ['Bunga Meja', 'Hand Bouquet', 'Bunga Papan']

@@ -1,11 +1,23 @@
 import { useState, useEffect } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, redirect } from 'react-router-dom'
 import customAPI from '../api'
 import Loading from '../components/Loading'
 import FormInput from '../components/form/FormInput'
 import FormTextArea from '../components/form/FormTextArea'
 import FormSelect from '../components/form/FormSelect'
 import { toast } from 'react-toastify'
+
+export const loader = (store) => async () => {
+  const user = store.getState().userState.user
+  if (!user) {
+    toast.warn('Anda Harus Login Terlebih Dahulu')
+    return redirect('/login')
+  } else if (user.role !== 'owner') {
+    toast.warn('Anda Bukan Owner')
+    return redirect('/')
+  }
+  return null
+}
 
 const EditProductView = () => {
   const categories = ['Bunga Meja', 'Hand Bouquet', 'Bunga Papan']

@@ -9,9 +9,15 @@ export const loader = (storage) => async () => {
     toast.warn('Anda Harus Login Terlebih Dahulu')
     return redirect('/login')
   }
-  const { data } = await customAPI.get('/order/current/user')
+  let orders
+  if (user.role === 'owner') {
+    const { data } = await customAPI.get('/order')
+    orders = data.data
+  } else {
+    const { data } = await customAPI.get('/order/current/user')
+    orders = data.data
+  }
 
-  const orders = data.data
   console.log(orders)
   return { orders }
 }
