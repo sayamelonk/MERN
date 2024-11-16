@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 const FormSelect = ({ label, name, list, defaultValue }) => {
   return (
-    <div className="form-control">
+    <label className="form-control">
       <label className="label">
         <span className="capitalize label-text">{label}</span>
       </label>
@@ -16,7 +16,7 @@ const FormSelect = ({ label, name, list, defaultValue }) => {
           </option>
         ))}
       </select>
-    </div>
+    </label>
   )
 }
 

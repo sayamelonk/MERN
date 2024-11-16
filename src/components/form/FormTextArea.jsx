@@ -1,17 +1,16 @@
 /* eslint-disable react/prop-types */
-const FormInput = ({ label, name, type, defaultValue }) => {
+const FormTextArea = ({ label, name, defaultValue }) => {
   return (
     <label className="form-control">
       <label className="label">
         <span className="label-text capitalize">{label}</span>
       </label>
-      <input
-        type={type}
+      <textarea
+        className="textarea textarea-bordered h-36"
         name={name}
         defaultValue={defaultValue}
-        className="input input-bordered"
-      />
+      ></textarea>
     </label>
   )
 }
-export default FormInput
+export default FormTextArea
